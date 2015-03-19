@@ -115,44 +115,44 @@ function read_orderbook(currency2sell, issuer2sell, currency2buy, issuer2buy){
         issuer2buy = '';    //XRP doesn't need issuer
     }
     var book_request = remote.request('book_offers',{          //request first part of book
-    taker_gets: {
-    'currency': currency2sell,
-    'issuer' : issuer2sell
-    },
-    taker_pays: {
-    'currency' : currency2buy,
-    'issuer' : issuer2buy
-    },
-	limit: limit_offers_orderbook
+		taker_gets: {
+			'currency': currency2sell,
+			'issuer' : issuer2sell
+    	},
+		taker_pays: {
+			'currency' : currency2buy,
+			'issuer' : issuer2buy
+    	},
+		limit: limit_offers_orderbook
     });
 
     book_request.request(function(err, book) {
-    if (err){
-        console.log('Error in requesting book offers' + JSON.stringify(err))
-    }
-    else{
-        ripple_orderbooks[0] = book;
-    }
+		if (err){
+		    console.log('Error in requesting book offers' + JSON.stringify(err))
+		}
+		else{
+		    ripple_orderbooks[0] = book;
+		}
     });
 
 	var book_request = remote.request('book_offers',{   //request second part of book
-    taker_gets: {
-    'currency': currency2buy,
-    'issuer' : issuer2buy
-    },
-    taker_pays: {
-    'currency' : currency2sell,
-    'issuer' : issuer2sell
-    },
-	limit: limit_offers_orderbook
+		taker_gets: {
+			'currency': currency2buy,
+			'issuer' : issuer2buy
+		},
+		taker_pays: {
+			'currency' : currency2sell,
+			'issuer' : issuer2sell
+		},
+		limit: limit_offers_orderbook
     });
 
     book_request.request(function(err, book) {
-    if (err){
-        console.log('Error in requesting book offers' + JSON.stringify(err))
-    }
-    else{
-        ripple_orderbooks[1] = book;
-    }
+		if (err){
+		    console.log('Error in requesting book offers' + JSON.stringify(err))
+		}
+    	else{
+        	ripple_orderbooks[1] = book;
+    	}
     });
 }
